@@ -1,0 +1,50 @@
+package modelo;
+
+import java.util.List;
+
+public abstract class Produto{
+
+    protected String nome;
+    protected double preco;
+    protected boolean disponivel;
+    protected int tempoPreparo;
+
+    protected List<String> restricoes;
+
+    public Produto(String nome, double preco, int tempoPreparo, List<String> restricoes) {
+        this.nome = nome;
+        setPreco(preco);
+        this.tempoPreparo = tempoPreparo;
+        this.restricoes = restricoes;
+        this.disponivel = true;
+    }
+
+    public abstract String getCategoria();
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        if (preco <= 0) {
+            throw new IllegalArgumentException("Preço inválido");
+        }
+        this.preco = preco;
+    }
+
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    public int getTempoPreparo() {
+        return tempoPreparo;
+    }
+
+    public List<String> getRestricoes() {
+        return restricoes;
+    }
+}
