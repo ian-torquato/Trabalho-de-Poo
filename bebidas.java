@@ -1,0 +1,15 @@
+package modelo;
+
+import java.util.List;
+
+public class Bebidas extends Produto {
+
+    public Bebidas(String nome, double preco, int tempoPreparo, List<String> restricoes) {
+        super(nome, preco, tempoPreparo, restricoes);
+    }
+
+    @Override
+    public String getCategoria() {
+        return "Bebidas";
+    }
+}
