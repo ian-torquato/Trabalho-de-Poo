@@ -2,9 +2,9 @@ package modelo;
 
 import java.util.List;
 
-public class Bebidas extends Produto {
+public class Bebida extends Produto {
 
-    public Bebidas(String nome, double preco, int tempoPreparo, List<String> restricoes) {
+    public Bebida(String nome, double preco, int tempoPreparo, List<String> restricoes) {
         super(nome, preco, tempoPreparo, restricoes);
     }
 
