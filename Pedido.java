@@ -1,12 +1,13 @@
 package modelo;
 
+import excecao.PedidoVazioException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
 
     private static int contador = 1;
-
     private int numero;
     private Cliente cliente;
     private List<ItemPedido> itens;
@@ -20,28 +21,36 @@ public class Pedido {
     }
 
     public void adicionarItem(Produto produto, String comentario) {
+
         itens.add(new ItemPedido(produto, comentario));
     }
 
     public void removerItem(ItemPedido item) {
+
         itens.remove(item);
     }
 
     public double calcularTotal() {
-        return itens.stream()
-                .mapToDouble(i -> i.getProduto().getPreco())
-                .sum();
+        double total = 0;
+
+        for(ItemPedido item : itens){
+            total += item.getProduto().getPreco();
+        }
+        return total;
     }
 
     public int calcularTempoTotal() {
-        return itens.stream()
-                .mapToInt(i -> i.getProduto().getTempoPreparo())
-                .sum();
+        int tempo = 0;
+
+        for(ItemPedido item : itens){
+            tempo += item.getProduto().getTempoPreparo();
+        }
+        return tempo;
     }
 
     public void finalizar() {
         if (itens.isEmpty()) {
-            throw new IllegalStateException("Pedido não pode ser finalizado vazio");
+            throw new PedidoVazioException();
         }
         finalizado = true;
     }
