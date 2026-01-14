@@ -1,6 +1,8 @@
 package modelo;
 
+import excecao.PedidoFinalizadoException;
 import excecao.PedidoVazioException;
+import excecao.ProdutoIndisponivelException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,9 @@ public class Pedido {
 
     public void adicionarItem(Produto produto, String comentario) {
 
+        if(!produto.isDisponivel()){
+            throw new ProdutoIndisponivelException();
+        }
         itens.add(new ItemPedido(produto, comentario));
     }
 
@@ -52,6 +57,9 @@ public class Pedido {
         if (itens.isEmpty()) {
             throw new PedidoVazioException();
         }
+        if(finalizado){
+            throw new PedidoFinalizadoException();
+        }
         finalizado = true;
     }
 
@@ -59,3 +67,4 @@ public class Pedido {
         return numero;
     }
 }
+
